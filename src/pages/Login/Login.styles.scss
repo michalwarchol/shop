@@ -1,0 +1,48 @@
+.loginContainer {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loginForm {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: auto;
+
+  .header {
+    font-family: 'Fjord One', serif;
+    font-size: 72px;
+    color: #2F66DD;
+    line-height: 90px;
+  }
+
+  .formContainer {
+    background-color: #2F66DD;
+    border-radius: 2px;
+    padding: 20px;
+    color: white;
+
+    .inputs {
+      margin: 40px 0;
+      width: 100%;
+    }
+
+    .register {
+      color: white;
+      margin-top: 84px;
+      text-align: center;
+      font-size: 18px;
+      span {
+        text-decoration: underline;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}

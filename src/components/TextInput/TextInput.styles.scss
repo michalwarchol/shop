@@ -1,0 +1,24 @@
+.textInput {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+
+  .input {
+    color: #2F66DD;
+    padding: 14px;
+    outline: 0;
+    margin: 0;
+    font-size: 24px;
+    border-radius: 2px;
+    border: 2px solid #2F66DD;
+  }
+
+  .errorWrapper {
+    color: #e0221f;
+  }
+}
+
+.inputError {
+  border: 2px solid #e0221f !important;
+}
