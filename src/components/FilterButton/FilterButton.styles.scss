@@ -1,0 +1,46 @@
+.filterButton {
+  border: 2px solid #2F66DD;
+  border-radius: 2px;
+  color: #2F66DD;
+  background-color: transparent;
+  padding: 9px 20px;
+  margin: 10px 0 10px 20px;
+  width: 200px;
+  font-size: 24px;
+  cursor: pointer;
+  
+  .filterButtonInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.portal {
+  background-color: white;
+  border: 2px solid #2F66DD;
+  border-radius: 2px;
+  padding: 8px;
+  width: 340px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  & > * {
+    margin-left: 10px;
+  }
+
+  .filterName {
+    width: 100px;
+  }
+  .filterInput {
+    width: 100px;
+  }
+}
+
+.button {
+  background-color: #2F66DD !important;
+  color: white !important;
+  width: 100%;
+}

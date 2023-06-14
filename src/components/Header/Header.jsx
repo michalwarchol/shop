@@ -12,7 +12,6 @@ import styles from './Header.styles.scss';
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  console.log(user);
 
   const logout = () => {
     setUser(null);
@@ -37,7 +36,7 @@ const Header = () => {
         <div className={styles.logo}>
           <span onClick={() => navigate('/')}>Alkohole24</span>
         </div>
-        <div class={styles.buttons}>
+        <div className={styles.buttons}>
           {user ? (
             <>
               <Button className={cls(styles.button, styles.userButton)} onClick={settings}>

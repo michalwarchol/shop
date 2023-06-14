@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 const UserContext = createContext(null);
 
 const UserProvider = () => {
-  const [user, setUser] = useState({id: 1, firstName: 'Michal'});
+  const [user, setUser] = useState({id: 1, firstName: 'Michal', bucket: [{}, {}]});
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
