@@ -1,0 +1,64 @@
+.header {
+  width: 100vw;
+  padding: 56px 0;
+  background-color: #2F66DD;
+ 
+  .headerInner {
+    max-width: 1240px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin: 0 auto;
+
+    @media screen and (min-width: 1240px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .logo {
+    font-family: 'Fjord One', sans-serif;
+    font-size: 72px;
+  }
+
+  .buttons {
+    display: flex;
+    & > * {
+      margin-left: 20px;
+    }
+
+    .button {
+      height: 73px;
+      display: flex;
+      align-items: center;
+
+      width: 200px;
+      font-size: 18px;
+
+      @media screen and (min-width: 1240px) {
+        width: 270px;
+        font-size: 24px;
+      }
+
+      img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+
+    .userButton {
+      justify-content: space-around;
+    }
+
+    .logoutButton {
+      width: 73px;
+      height: 73px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
