@@ -1,14 +1,10 @@
 import React from 'react';
 
-import Header from 'components/Header/Header';
+import View from './Dashboard.view';
 
 const DashboardPage = () => {
-
-  return (
-    <div>
-      <Header />
-    </div>
-  );
+  
+  return (<View />);
 };
 
 export default DashboardPage;

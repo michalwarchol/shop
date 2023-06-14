@@ -1,0 +1,47 @@
+.filterBar {
+  width: 100%;
+  border-bottom: 2px solid #2F66DD;
+  padding: 14px 0;
+
+  .filterBarInner {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+
+    .form {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .inputs {
+        display: flex;
+      }
+    }
+
+    .bucket {
+      margin-left: auto;
+      cursor: pointer;
+      position: relative;
+
+      img {
+        width: 40px;
+        height: 30px;
+      }
+
+      .itemAmount {
+        position: absolute;
+        background-color: #e0221f;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        bottom: -6px;
+        right: -6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 4px;
+      }
+    }
+  }
+}

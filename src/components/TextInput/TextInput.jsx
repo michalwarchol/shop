@@ -3,8 +3,8 @@ import cls from 'classnames';
 
 import styles from './TextInput.styles.scss';
 
-const TextInput = ({ name, value, handleChange, type, error, touched, placeholder }) => (
-  <div className={styles.textInput}>
+const TextInput = ({ name, value, handleChange, type, error, touched, placeholder, className }) => (
+  <div className={cls(styles.textInput, className)}>
     <input
       name={name}
       value={value}
