@@ -1,43 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import config from 'src/config';
 
 import View from './Dashboard.view';
 
 const DashboardPage = () => {
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries([...searchParams]);
+  const [items, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
 
-  const items = [{
-    id: '1',
-    name: 'item 1',
-    price: '110.12',
-    src: 'https://images.pexels.com/photos/163822/color-umbrella-red-yellow-163822.jpeg',
-  }, {
-    id: '1',
-    name: 'item 1',
-    price: '110.12',
-    src: 'https://images.pexels.com/photos/163822/color-umbrella-red-yellow-163822.jpeg',
-  }, {
-    id: '1',
-    name: 'item 1',
-    price: '110.12',
-    src: 'https://images.pexels.com/photos/163822/color-umbrella-red-yellow-163822.jpeg',
-  }, {
-    id: '1',
-    name: 'item 1',
-    price: '110.12',
-    src: 'https://images.pexels.com/photos/163822/color-umbrella-red-yellow-163822.jpeg',
-  }, {
-    id: '1',
-    name: 'item 1',
-    price: '110.12',
-    src: 'https://images.pexels.com/photos/163822/color-umbrella-red-yellow-163822.jpeg',
-  }, {
-    id: '1',
-    name: 'item 1',
-    price: '110.12',
-    src: 'https://images.pexels.com/photos/163822/color-umbrella-red-yellow-163822.jpeg',
-  }, ]
+  useEffect(() => {
+    fetch(`${config.apiUrl}/products?limit=20&page=1`)
+      .then(response => response.json())
+      .then(res => {
+        console.log(res);
+      }).catch(err => console.log(err));
+  }, [searchParams]);
+
   return (
     <View
       items={items}

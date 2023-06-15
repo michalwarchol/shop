@@ -1,6 +1,9 @@
 const path =  require('path');
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' })
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   //path to entry paint
@@ -13,6 +16,10 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
       title: 'Alkohole24',
       template: './public/index.html',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed),
+      'process.env.NODE_ENV': JSON.stringify(isDevelopment ? 'development' : 'production'),
     }),
   new WebpackManifestPlugin()],
   module: {
