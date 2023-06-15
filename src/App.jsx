@@ -7,6 +7,7 @@ import RegisterPage from "pages/Register";
 import ProductPage from "pages/Product";
 import UserPanelPage from "pages/UserPanel/UserPanel.container";
 import OrdersHistoryPage from "pages/OrdersHistory/OrdersHistory.container";
+import CartPage from "pages/Cart/Cart.container";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
                   element: <OrdersHistoryPage />,
                 },
               ],
+            },
+            {
+              path: "cart",
+              element: <CartPage />,
             },
           ],
         },
