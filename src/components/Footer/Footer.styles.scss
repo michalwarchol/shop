@@ -1,0 +1,41 @@
+.footer {
+  width: 100%;
+  padding: 56px 0 20px 0;
+  background: #2f66dd;
+
+  .footerInner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+
+    .logo {
+      font-family: "Fjord One", sans-serif;
+      font-size: 56px;
+      color: white;
+    }
+
+    .products {
+      display: flex;
+
+      .productColumn {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+
+        a {
+          color: white;
+          text-decoration: none;
+          font-size: 24px;
+        }
+      }
+    }
+
+    .legal {
+      margin-top: 20px;
+      color: white;
+    }
+  }
+}

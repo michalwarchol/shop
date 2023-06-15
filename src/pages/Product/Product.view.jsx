@@ -5,6 +5,7 @@ import { useQuery } from "src/hooks/useQuery";
 import ProductInfo from "components/ProductInfo/ProductInfo";
 import FilterBar from "components/FilterBar/FilterBar";
 import ProductReviews from "components/ProductReviews/ProductReviews";
+import Footer from "components/Footer/Footer";
 import styles from "./Product.styles.scss";
 
 const ProductView = () => {
@@ -17,6 +18,7 @@ const ProductView = () => {
       <FilterBar />
       <ProductInfo id={id} />
       <ProductReviews id={id} />
+      <Footer />
     </div>
   );
 };
