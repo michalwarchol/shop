@@ -20,12 +20,13 @@ const FilterBar = () => {
   let searchTimeout = null;
 
   const search = (values) => {
+    const params = Object.fromEntries([ ...searchParams ]);
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       if (location !== '/') {
         navigate('/');
       }
-      setSearchParams(values);
+      setSearchParams({ ...params, ...values });
     }, 2000);
   }
 
@@ -43,7 +44,6 @@ const FilterBar = () => {
         <Formik initialValues={initialValues} onSubmit={search} validationSchema={validationSchema}>
           {({ values, handleChange }) => (
             <Form className={styles.form}>
-              {console.log(values)}
               <div className={styles.inputs}>
                 <TextInput name="search" value={values.search} handleChange={handleChange} placeholder="szukaj" />
                 <FilterButton />

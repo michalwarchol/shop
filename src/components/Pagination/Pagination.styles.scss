@@ -1,0 +1,52 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 96px;
+}
+
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #2F66DD;
+  border-radius: 2px;
+  color: #2F66DD;
+  margin: 0 10px;
+  background-color: white;
+
+  &:hover {
+    background-color: darken($color: white, $amount: 10),
+  }
+}
+
+.activePaginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #2F66DD;
+  border-radius: 2px;
+  color: white;
+  margin: 0 10px;
+  background-color:#2F66DD;
+
+  &:hover {
+    background-color: darken($color: #2F66DD, $amount: 10),
+  }
+}
+
+.marginLeft {
+  margin-left: 40px !important;
+}
+
+.marginRight {
+  margin-right: 40px !important;
+}
+
+.marginButtonWrapper {
+  width: 130px;
+}

@@ -1,0 +1,28 @@
+.itemNode {
+  width: 371px;
+  border-radius: 2px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 10px black;
+  }
+
+  .image {
+    height: 357px;
+    width: 100%;
+  }
+
+  .name {
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    color: black;
+  }
+  .price {
+    font-size: 24px;
+    color: #2F66DD;
+  }
+}
