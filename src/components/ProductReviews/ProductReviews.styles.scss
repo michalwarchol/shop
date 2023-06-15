@@ -16,20 +16,26 @@
       margin: 0;
     }
 
-    .addReviewInput {
-      border: none;
-      outline: none;
-      background: #e5e5e5;
-      padding: 16px;
-      font-size: 20px;
-      font-family: sans-serif;
-      resize: none;
-    }
+    .formContainer {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
 
-    .addReviewButton {
-      background: #2f66dd;
-      color: white;
-      max-width: 30%;
+      .addReviewInput {
+        border: none;
+        outline: none;
+        background: #e5e5e5;
+        padding: 16px;
+        font-size: 20px;
+        font-family: sans-serif;
+        resize: none;
+      }
+
+      .addReviewButton {
+        background: #2f66dd;
+        color: white;
+        max-width: 30%;
+      }
     }
 
     .reviews {
