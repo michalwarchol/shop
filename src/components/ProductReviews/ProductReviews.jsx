@@ -50,7 +50,6 @@ const ProductReviews = ({ id }) => {
 
   const onSubmit = (values) => {
     // TODO
-    console.log(values);
   };
 
   const renderedReviews = reviews.map(({ id, description, user_id }) => (

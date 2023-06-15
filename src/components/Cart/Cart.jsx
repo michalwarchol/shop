@@ -7,7 +7,6 @@ import CartItem from "components/CartItem/CartItem";
 
 const Cart = () => {
   const { user, setUser } = useContext(UserContext);
-  console.log(user.bucket);
 
   if (!user) {
     return null;
