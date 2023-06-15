@@ -1,0 +1,30 @@
+.settings {
+  width: 100vw;
+  padding: 56px 0;
+
+  .settingsInner {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+
+    .hello {
+      font-size: 36px;
+    }
+
+    .button {
+      background: #2f66dd;
+      width: 20vw;
+      min-width: max-content;
+    }
+
+    .deleteButton {
+      background: #dd2f2d;
+      width: 20vw;
+      min-width: max-content;
+    }
+  }
+}

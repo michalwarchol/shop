@@ -5,6 +5,8 @@ import DashboardPage from "pages/Dashboard";
 import LoginPage from "pages/Login";
 import RegisterPage from "pages/Register";
 import ProductPage from "pages/Product";
+import UserPanelPage from "pages/UserPanel/UserPanel.container";
+import OrdersHistoryPage from "pages/OrdersHistory/OrdersHistory.container";
 
 function App() {
   return (
@@ -34,6 +36,17 @@ function App() {
             {
               path: "product",
               element: <ProductPage />,
+            },
+            {
+              path: "settings",
+              element: <UserPanelPage />,
+              children: [
+                {
+                  // TODO can't retrieve bundle of children components on page refresh
+                  path: "orders",
+                  element: <OrdersHistoryPage />,
+                },
+              ],
             },
           ],
         },
