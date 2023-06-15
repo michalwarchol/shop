@@ -1,0 +1,5 @@
+.product {
+  & > * {
+    max-width: 100%;
+  }
+}

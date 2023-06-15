@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import styles from './FooterSmall.styles.scss';
+import styles from "./FooterSmall.styles.scss";
+import cls from "classnames";
 
-const FooterSmall = () => (
-  <div className={styles.footerSmall}>
-    Alkohole24 {new Date().getFullYear()}. Wszystkie prawa zastrzeżone
-  </div>
+const FooterSmall = ({ className }) => (
+  <div className={cls(styles.footerSmall, className)}>Alkohole24 {new Date().getFullYear()}. Wszystkie prawa zastrzeżone</div>
 );
 
 export default FooterSmall;

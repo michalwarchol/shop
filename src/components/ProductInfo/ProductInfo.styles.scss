@@ -1,0 +1,83 @@
+.productInfo {
+  width: 100%;
+  border-bottom: 2px solid #2f66dd;
+  padding: 14px 0;
+
+  .productInfoInner {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+
+    .imgContainer {
+      flex: 1 1 25%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .infoContainer {
+      flex: 3;
+
+      .name {
+        font-size: 56px;
+      }
+
+      .price {
+        color: #2f66dd;
+        font-size: 42px;
+        margin: 0;
+      }
+
+      .description {
+        font-size: 24px;
+      }
+
+      .orderQuantityWrapper {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        margin-bottom: 10px;
+
+        .orderQuantity {
+          display: block;
+          background: #2f66dd;
+          color: white;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 28px;
+        }
+
+        .orderQuantityButton {
+          color: #2f66dd;
+          border: 2px solid #2f66dd;
+          width: 40px;
+          height: 40px;
+          font-size: 28px;
+          padding: 0;
+        }
+      }
+
+      .orderBar {
+        display: flex;
+        column-gap: 10px;
+
+        .addToBasket {
+          background: #2f66dd;
+          min-width: max-content;
+          width: 40%;
+        }
+        .buyNow {
+          border: 2px solid #2f66dd;
+          color: #2f66dd;
+          min-width: max-content;
+          width: 40%;
+        }
+      }
+    }
+  }
+}
