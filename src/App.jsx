@@ -22,16 +22,16 @@ function App() {
           element: <UserProvider />,
           children: [
             {
-              path: "/",
+              path: "/front",
               index: true,
               element: <DashboardPage />,
             },
             {
-              path: "login",
+              path: "login_front",
               element: <LoginPage />,
             },
             {
-              path: "register",
+              path: "register_front",
               element: <RegisterPage />,
             },
             {

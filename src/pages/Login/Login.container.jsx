@@ -24,12 +24,12 @@ const LoginPage = () => {
         return;
       }
       setUser(res.user);
-      navigate('/');
+      navigate('/front');
     }).catch(error => console.log(error));
   }
 
   const redirectToRegister = () => {
-    navigate('/register');
+    navigate('/register_front');
   }
 
   return <View onSubmit={onSubmit} redirectToRegister={redirectToRegister} />;

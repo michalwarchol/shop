@@ -41,7 +41,7 @@ const RegisterPage = () => {
         return;
       }
       setUser(res.user);
-      navigate('/');
+      navigate('/front');
     }).catch(error => console.log(error));
   }
 
@@ -85,7 +85,7 @@ const RegisterPage = () => {
   }
 
   const redirectToLogin = () => {
-    navigate('/login');
+    navigate('/login_front');
   }
 
   return <View onSubmit={onSubmit} redirectToLogin={redirectToLogin} />;
