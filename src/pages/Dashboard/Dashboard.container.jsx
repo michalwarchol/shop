@@ -12,7 +12,8 @@ const DashboardPage = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/products?${formatParams(params)}limit=12&page=1`)
+    const page = `page=${params.page || 1}`;
+    fetch(`${config.apiUrl}/products?${formatParams(params)}limit=12&${page}`)
       .then(response => response.json())
       .then(res => {
         setItems(formatItems(res.result.data));

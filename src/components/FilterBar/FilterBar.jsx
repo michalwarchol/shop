@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 
@@ -37,10 +37,6 @@ const FilterBar = () => {
   const goToBucket = () => {
     navigate("/cart");
   };
-
-  useEffect(() => {
-    console.log(searchParams);
-  }, [searchParams]);
 
   return (
     <div className={styles.filterBar}>
