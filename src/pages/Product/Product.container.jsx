@@ -30,7 +30,7 @@ const ProductPage = () => {
       })
     })
     .then((response) => response.json())
-    .then(async res => {
+    .then(async () => {
       const newOpinions = await getOpinions();
       setOpinions(newOpinions.data);
     }).catch(err => console.log(err));
@@ -54,6 +54,11 @@ const ProductPage = () => {
     fetch(`${config.apiUrl}/products/${params.id}`)
       .then(response => response.json())
       .then(async res => {
+        if(!res.product) {
+          navigate('/');
+          return;
+        }
+
         const data = await Promise.all([
           getCountry(res.product.countryOriginId),
           getOpinions(),
