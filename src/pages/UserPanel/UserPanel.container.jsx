@@ -13,7 +13,7 @@ const UserPanelPage = () => {
       return;
     }
 
-    navigate("/login_front");
+    navigate("/login");
   }, [user, navigate]);
 
   if (!user) {

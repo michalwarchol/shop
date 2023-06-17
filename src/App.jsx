@@ -27,16 +27,16 @@ function App() {
           ),
           children: [
             {
-              path: "/front",
+              path: "/",
               index: true,
               element: <DashboardPage />,
             },
             {
-              path: "login_front",
+              path: "login",
               element: <LoginPage />,
             },
             {
-              path: "register_front",
+              path: "register",
               element: <RegisterPage />,
             },
             {

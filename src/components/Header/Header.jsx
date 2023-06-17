@@ -15,15 +15,16 @@ const Header = () => {
 
   const logout = () => {
     setUser(null);
-    navigate("/login_front");
+    localStorage.clear('userId');
+    navigate("/login");
   };
 
   const login = () => {
-    navigate("/login_front");
+    navigate("/login");
   };
 
   const register = () => {
-    navigate("/register_front");
+    navigate("/register");
   };
 
   const settings = () => {
@@ -34,7 +35,7 @@ const Header = () => {
     <div className={styles.header}>
       <div className={styles.headerInner}>
         <div className={styles.logo}>
-          <span onClick={() => navigate("/front")}>Alkohole24</span>
+          <span onClick={() => navigate("/")}>Alkohole24</span>
         </div>
         <div className={styles.buttons}>
           {user ? (

@@ -20,16 +20,13 @@ const LoginPage = () => {
     })
     .then(response => response.json())
     .then(res => {
-      if (res.error) {
-        return;
-      }
       setUser(res.user);
-      navigate('/front');
+      navigate('/');
     }).catch(error => console.log(error));
   }
 
   const redirectToRegister = () => {
-    navigate('/register_front');
+    navigate('/register');
   }
 
   return <View onSubmit={onSubmit} redirectToRegister={redirectToRegister} />;

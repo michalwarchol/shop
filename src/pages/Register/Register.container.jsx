@@ -19,12 +19,7 @@ const RegisterPage = () => {
     })
     .then(response => response.json())
     .then(res => {
-      if(res.error) {
-        setUser(null);
-        return;
-      }
-      setUser(res.user);
-      navigate('/front');
+      setUser(res);
     }).catch(error => console.log(error));
   }
 
@@ -70,7 +65,7 @@ const RegisterPage = () => {
   }
 
   const redirectToLogin = () => {
-    navigate('/login_front');
+    navigate('/login');
   }
 
   return <View onSubmit={onSubmit} redirectToLogin={redirectToLogin} />;

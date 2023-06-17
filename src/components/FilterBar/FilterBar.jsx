@@ -27,8 +27,8 @@ const FilterBar = () => {
     const params = Object.fromEntries([...searchParams]);
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
-      if (location !== "/front") {
-        navigate("/front");
+      if (location !== "/") {
+        navigate("/");
       }
       setSearchParams({ ...params, ...values });
     }, 2000);
