@@ -10,25 +10,8 @@ const RegisterPage = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const login = (email, password) => {
-    fetch(`${config.apiUrl}/login`, {
-      method: 'POST',
-      body: JSON.stringify({ email, password}),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then(response => response.json())
-    .then(res => {
-      if (res.error) {
-        return;
-      }
-      me();
-    }).catch(error => console.log(error));
-  };
-
-  const me = () => {
-    fetch(`${config.apiUrl}/me`, {
+  const me = (userId) => {
+    fetch(`${config.apiUrl}/me/${userId}`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +62,9 @@ const RegisterPage = () => {
         return;
       }
 
-      login(values.email, values.password);      
+      localStorage.setItem('userId', res.user);
+
+      me(res.user);  
     })
     .catch(error => console.log(error));
   }

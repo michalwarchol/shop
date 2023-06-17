@@ -1,15 +1,20 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
 
 import config from 'src/config';
 
 const UserContext = createContext(null);
 
-const UserProvider = () => {
+const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const me = () => {
-    fetch(`${config.apiUrl}/me`, {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      setUser(null);
+      return;
+    }
+
+    fetch(`${config.apiUrl}/me/${userId}`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +36,7 @@ const UserProvider = () => {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <Outlet />
+      {children}
     </UserContext.Provider>
   );
 };

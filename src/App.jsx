@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UserProvider from "providers/UserProvider";
+import DataProvider from "providers/DataProvider/DataProvider";
 import DashboardPage from "pages/Dashboard";
 import LoginPage from "pages/Login";
 import RegisterPage from "pages/Register";
@@ -19,7 +20,11 @@ function App() {
         },
         {
           path: "/",
-          element: <UserProvider />,
+          element: (
+            <UserProvider>
+              <DataProvider />
+            </UserProvider>
+          ),
           children: [
             {
               path: "/front",

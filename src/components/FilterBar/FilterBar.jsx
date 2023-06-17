@@ -8,12 +8,16 @@ import FilterButton from "components/FilterButton/FilterButton";
 import bucket from "src/assets/images/bucket.svg";
 
 import styles from "./FilterBar.styles.scss";
-import { initialValues } from "./FilterBar.consts";
+import { getDefaultFilters } from './FilterBar.utils';
 import validationSchema from "./FilterBar.validation";
 
 const FilterBar = () => {
   const { user } = useContext(UserContext);
   const [searchParams, setSearchParams] = useSearchParams();
+  const params = Object.fromEntries([...searchParams]);
+
+  console.log('xdddd', params);
+  console.log(getDefaultFilters(params));
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,7 +46,7 @@ const FilterBar = () => {
     <div className={styles.filterBar}>
       <div className={styles.filterBarInner}>
         <Formik
-          initialValues={initialValues}
+          initialValues={getDefaultFilters(params)}
           onSubmit={search}
           validationSchema={validationSchema}
         >
