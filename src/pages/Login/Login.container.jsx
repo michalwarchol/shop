@@ -21,6 +21,7 @@ const LoginPage = () => {
     .then(response => response.json())
     .then(res => {
       setUser(res.user);
+      localStorage.setItem('userId', res.user.id);
       navigate('/');
     }).catch(error => console.log(error));
   }

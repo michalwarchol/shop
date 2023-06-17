@@ -16,9 +16,6 @@ const FilterBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = Object.fromEntries([...searchParams]);
 
-  console.log('xdddd', params);
-  console.log(getDefaultFilters(params));
-
   const location = useLocation();
   const navigate = useNavigate();
   let searchTimeout = null;
