@@ -1,5 +1,5 @@
 const config = {
-  apiUrl: process.env.REACT_APP_API_URL,
+  apiUrl: 'http://31.6.70.73',
 };
 
 export default config;
