@@ -1,30 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import styles from "./Settings.styles.scss";
 import { UserContext } from "providers/UserProvider";
 import Button from "components/Button/Button";
-import { useNavigate } from "react-router-dom";
+import OrdersHistoryPage from "pages/OrdersHistory/OrdersHistory.container";
 
 const Settings = () => {
   const { user, setUser } = useContext(UserContext);
-
-  const navigate = useNavigate();
+  const [isShowOrders, setShowOrders] = useState(false);
 
   const showOrders = () => {
-    navigate("orders");
+    setShowOrders(true);
   };
 
   const logout = () => {
     setUser(null);
-  };
-
-  const deleteAccount = () => {};
-
-  const handleDelete = () => {
-    if (!window.confirm("Na pewno chcesz usunąć swoje konto?")) {
-      return;
-    }
-    deleteAccount();
   };
 
   return (
@@ -43,13 +33,8 @@ const Settings = () => {
         >
           WYLOGUJ SIĘ
         </Button>
-        <Button
-          className={styles.deleteButton}
-          onClick={handleDelete}
-        >
-          USUŃ KONTO
-        </Button>
       </div>
+      {isShowOrders && <OrdersHistoryPage setShowOrders={setShowOrders} />}
     </div>
   );
 };

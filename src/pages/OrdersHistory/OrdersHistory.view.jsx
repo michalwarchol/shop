@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 
 import styles from "./OrdersHistory.styles.scss";
 import Order from "components/Order/Order";
