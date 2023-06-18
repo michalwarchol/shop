@@ -9,7 +9,7 @@ const CartItem = ({ item, increaseAmount, decreaseAmount, removeItem }) => {
     <div className={styles.item}>
       <div className={styles.itemLeft}>
         <img
-          src="https://kultowealkohole.pl/uploads/images/3e/57c5fee92cf09.png"
+          src={`data:image/jpg;charset=utf8;base64,${item.image}`}
           alt={item.name}
         />
         <div className={styles.itemName}>{item.name}</div>
@@ -32,7 +32,7 @@ const CartItem = ({ item, increaseAmount, decreaseAmount, removeItem }) => {
         </div>
         <div className={styles.itemPrice}>{Math.round(item.amount * item.price * 100) / 100} zł</div>
         <div className={styles.deleteItem}>
-          <Button onClick={removeItem}>
+          <Button onClick={() => removeItem(item.id)}>
             <img
               src={removeIcon}
               alt="remove"

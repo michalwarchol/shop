@@ -9,23 +9,13 @@ import TextArea from "components/TextArea/TextArea";
 const ProductReviews = ({ id, opinions, sendOpinion }) => {
   if (!id) return <div>Wybierz produkt</div>;
 
-  const addReview = () => {
-    // TODO
-  };
-
-  const getReviewAuthor = (id) => {
-    // TODO
-
-    return "Pan Maciej";
-  };
-
-  const renderedReviews = opinions.map(({ id, description, user_id }) => (
+  const renderedReviews = opinions.map(({ id, description, user }) => (
     <div
       className={styles.review}
       key={id}
     >
       <div className={styles.reviewInfo}>
-        <p className={styles.reviewAuthor}>{getReviewAuthor(user_id)}</p>
+        <p className={styles.reviewAuthor}>{user.firstName}</p>
       </div>
       <div className={styles.reviewText}>{description}</div>
     </div>
@@ -58,7 +48,6 @@ const ProductReviews = ({ id, opinions, sendOpinion }) => {
               />
               <Button
                 className={styles.addReviewButton}
-                onClick={addReview}
                 type="submit"
               >
                 DODAJ

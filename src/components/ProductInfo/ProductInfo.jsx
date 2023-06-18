@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { initialValues } from "./ProductInfo.consts";
 import Button from "components/Button/Button";
 import styles from "./ProductInfo.styles.scss";
+import { DataContext } from "providers/DataProvider/DataProvider";
 
-const ProductInfo = ({ id, product, country }) => {
+const ProductInfo = ({ id, product, country, buyNow, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
+  const { bucket } = useContext(DataContext);
+  const isInBucket = bucket.find((item) => item.productId === parseInt(id));
   const { name, image, price, description, availableAmount } = product || initialValues;
 
   const incrementOrderQuantity = () => {
@@ -17,14 +20,6 @@ const ProductInfo = ({ id, product, country }) => {
     if (quantity > 1) {
       setQuantity((currentQuantity) => (currentQuantity -= 1));
     }
-  };
-
-  const addToBasket = () => {
-    // TODO
-  };
-
-  const buyNow = () => {
-    // TODO
   };
 
   if (!id) return <div>Wybierz produkt</div>;
@@ -62,13 +57,17 @@ const ProductInfo = ({ id, product, country }) => {
           <div className={styles.orderBar}>
             <Button
               className={styles.addToBasket}
-              onClick={addToBasket}
+              onClick={() => {
+                if (!isInBucket) {
+                  addToCart(quantity, price)
+                }
+              }}
             >
-              DODAJ DO KOSZYKA
+              {isInBucket ? 'JUŻ W KOSZYKU' : 'DODAJ DO KOSZYKA'}
             </Button>
             <Button
               className={styles.buyNow}
-              onClick={buyNow}
+              onClick={() => buyNow(quantity)}
             >
               KUP TERAZ
             </Button>

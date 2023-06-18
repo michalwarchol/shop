@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import config from 'src/config';
 
 import View from "./Product.view";
+import { DataContext } from "providers/DataProvider/DataProvider";
 
 const ProductPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { bucketId, getBucket } = useContext(DataContext);
   const params = Object.fromEntries([...searchParams]);
   const [product, setProduct] = useState(null);
   const [country, setCountry] = useState({ name: '' });
@@ -34,6 +36,26 @@ const ProductPage = () => {
       const newOpinions = await getOpinions();
       setOpinions(newOpinions.data);
     }).catch(err => console.log(err));
+  }
+
+  const addToCart = (amount, price) => {
+    fetch(`${config.apiUrl}/order_entries/${bucketId}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        order_id: bucketId,
+        amount: amount,
+        product_id: params.id,
+        historic_price: price,
+      })
+    })
+    .then(() => {
+      getBucket(bucketId);
+      navigate('/');
+    }).catch(err => console.log(err));
+  };
+
+  const buyNow = (amount) => {
+    navigate(`/cart?buynow=1&product=${params.id}&amount=${amount}`);
   }
 
   const getOpinions = async () => {
@@ -76,6 +98,8 @@ const ProductPage = () => {
       country={country}
       opinions={opinions}
       sendOpinion={sendOpinion}
+      buyNow={buyNow}
+      addToCart={addToCart}
     /> : null;
 };
 

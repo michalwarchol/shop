@@ -2,17 +2,17 @@ import React, { useContext } from "react";
 import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 
-import { UserContext } from "providers/UserProvider";
 import TextInput from "components/TextInput/TextInput";
 import FilterButton from "components/FilterButton/FilterButton";
-import bucket from "src/assets/images/bucket.svg";
+import bucketImg from "src/assets/images/bucket.svg";
 
 import styles from "./FilterBar.styles.scss";
 import { getDefaultFilters } from './FilterBar.utils';
 import validationSchema from "./FilterBar.validation";
+import { DataContext } from "providers/DataProvider/DataProvider";
 
 const FilterBar = () => {
-  const { user } = useContext(UserContext);
+  const { bucket } = useContext(DataContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const params = Object.fromEntries([...searchParams]);
 
@@ -59,10 +59,10 @@ const FilterBar = () => {
                 onClick={goToBucket}
               >
                 <img
-                  src={bucket}
+                  src={bucketImg}
                   alt="bucket"
                 />
-                {user?.bucket && <div className={styles.itemAmount}>{user?.bucket.length}</div>}
+                {bucket && <div className={styles.itemAmount}>{bucket.length}</div>}
               </div>
             </Form>
           )}
