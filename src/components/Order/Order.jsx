@@ -8,11 +8,11 @@ const Order = ({ order: { id, products, totalPrice } }) => {
       className={styles.product}
       key={product.name}
     >
-      <div className={styles.productName}>{product.name}</div>
+      <div className={styles.productName}>{product.product.name}</div>
       <div className={styles.productDetails}>
         <div className={styles.productAmount}>{product.amount}x</div>
-        <div className={styles.productPrice}>{product.price} zł</div>
-        <div className={styles.totalPrice}>{product.amount * product.price} zł</div>
+        <div className={styles.productPrice}>{product.product.price} zł</div>
+        <div className={styles.totalPrice}>{product.amount * product.product.price} zł</div>
       </div>
     </div>
   ));

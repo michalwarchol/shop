@@ -9,12 +9,11 @@
 
   .inner {
     background: white;
+    height: 80vh;
+    overflow: auto;
     width: 100%;
     max-width: 960px;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
     justify-content: center;
     border: 2px solid #2f66dd;
     row-gap: 20px;
