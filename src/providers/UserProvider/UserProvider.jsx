@@ -1,21 +1,42 @@
-import React, { createContext, useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { createContext, useEffect, useState } from 'react';
+
+import config from 'src/config';
 
 const UserContext = createContext(null);
 
-const UserProvider = () => {
-  const [user, setUser] = useState({
-    id: 1,
-    firstName: "Michal",
-    bucket: [
-      { id: "3", price: 69.99, name: "Jagermaister 0,7L", amount: 2 },
-      { id: "2", price: 79.99, amount: 1, name: "Wino Chateau de Terrefort" },
-    ],
-  });
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const me = () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      setUser(null);
+      return;
+    }
+
+    fetch(`${config.apiUrl}/me/${userId}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(response => response.json())
+    .then(res => {
+      if(res.error) {
+        setUser(null);
+        return;
+      }
+      setUser(res.user);
+    }).catch(error => console.log(error));
+  }
+
+  useEffect(() => {
+    me();
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <Outlet />
+      {children}
     </UserContext.Provider>
   );
 };

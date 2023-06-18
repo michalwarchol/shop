@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { initialValues } from "./ProductInfo.consts";
 import Button from "components/Button/Button";
 import styles from "./ProductInfo.styles.scss";
+import { DataContext } from "providers/DataProvider/DataProvider";
 
-const ProductInfo = ({ id }) => {
+const ProductInfo = ({ id, product, country, buyNow, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const { name, src, category_id, price, alcohol_content, rating, description, country_origin_id, available_amount } = initialValues;
-
-  const getOriginCountry = () => {
-    // TODO
-
-    return "Niemcy";
-  };
+  const { bucket } = useContext(DataContext);
+  const isInBucket = bucket.find((item) => item.productId === parseInt(id));
+  const { name, image, price, description, availableAmount } = product || initialValues;
 
   const incrementOrderQuantity = () => {
-    if (quantity < available_amount) {
+    if (quantity < availableAmount) {
       setQuantity((currentQuantity) => (currentQuantity += 1));
     }
   };
@@ -25,14 +22,6 @@ const ProductInfo = ({ id }) => {
     }
   };
 
-  const addToBasket = () => {
-    // TODO
-  };
-
-  const buyNow = () => {
-    // TODO
-  };
-
   if (!id) return <div>Wybierz produkt</div>;
 
   return (
@@ -40,7 +29,7 @@ const ProductInfo = ({ id }) => {
       <div className={styles.productInfoInner}>
         <div className={styles.imgContainer}>
           <img
-            src={src}
+            src={`data:image/jpg;charset=utf8;base64,${image}`}
             alt={name}
           />
         </div>
@@ -48,7 +37,7 @@ const ProductInfo = ({ id }) => {
           <p className={styles.name}>{name}</p>
           <p className={styles.price}>{price} zł</p>
           <p className={styles.description}>{description}</p>
-          <p className={styles.origin}>Kraj pochodzenia: {getOriginCountry()}</p>
+          <p className={styles.origin}>Kraj pochodzenia: {country.name}</p>
           <div className={styles.orderQuantityWrapper}>
             <p>Ilość sztuk:</p>
             <Button
@@ -68,13 +57,17 @@ const ProductInfo = ({ id }) => {
           <div className={styles.orderBar}>
             <Button
               className={styles.addToBasket}
-              onClick={addToBasket}
+              onClick={() => {
+                if (!isInBucket) {
+                  addToCart(quantity, price)
+                }
+              }}
             >
-              DODAJ DO KOSZYKA
+              {isInBucket ? 'JUŻ W KOSZYKU' : 'DODAJ DO KOSZYKA'}
             </Button>
             <Button
               className={styles.buyNow}
-              onClick={buyNow}
+              onClick={() => buyNow(quantity)}
             >
               KUP TERAZ
             </Button>

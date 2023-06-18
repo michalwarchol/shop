@@ -1,19 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 
-import { UserContext } from "providers/UserProvider";
 import TextInput from "components/TextInput/TextInput";
 import FilterButton from "components/FilterButton/FilterButton";
-import bucket from "src/assets/images/bucket.svg";
+import bucketImg from "src/assets/images/bucket.svg";
 
 import styles from "./FilterBar.styles.scss";
-import { initialValues } from "./FilterBar.consts";
+import { getDefaultFilters } from './FilterBar.utils';
 import validationSchema from "./FilterBar.validation";
+import { DataContext } from "providers/DataProvider/DataProvider";
 
 const FilterBar = () => {
-  const { user } = useContext(UserContext);
+  const { bucket } = useContext(DataContext);
   const [searchParams, setSearchParams] = useSearchParams();
+  const params = Object.fromEntries([...searchParams]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,15 +35,11 @@ const FilterBar = () => {
     navigate("/cart");
   };
 
-  useEffect(() => {
-    console.log(searchParams);
-  }, [searchParams]);
-
   return (
     <div className={styles.filterBar}>
       <div className={styles.filterBarInner}>
         <Formik
-          initialValues={initialValues}
+          initialValues={getDefaultFilters(params)}
           onSubmit={search}
           validationSchema={validationSchema}
         >
@@ -62,10 +59,10 @@ const FilterBar = () => {
                 onClick={goToBucket}
               >
                 <img
-                  src={bucket}
+                  src={bucketImg}
                   alt="bucket"
                 />
-                {user?.bucket && <div className={styles.itemAmount}>{user?.bucket.length}</div>}
+                {bucket && <div className={styles.itemAmount}>{bucket.length}</div>}
               </div>
             </Form>
           )}

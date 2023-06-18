@@ -16,6 +16,7 @@ const DashboardView = ({ items, page = 1, perPage = 12, total = 1 }) => (
       {items.map((item, index) => (
         <ItemNode item={item} key={index} />
       ))}
+      {items.length === 0 && <div className={styles.noContent}>Brak wyników</div>}
     </div>
     <Pagination page={page} perPage={perPage} total={total} />
     <Footer />

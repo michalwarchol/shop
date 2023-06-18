@@ -8,7 +8,7 @@ import ProductReviews from "components/ProductReviews/ProductReviews";
 import Footer from "components/Footer/Footer";
 import styles from "./Product.styles.scss";
 
-const ProductView = () => {
+const ProductView = ({ product, country, opinions, sendOpinion, buyNow, addToCart }) => {
   const query = useQuery();
   const id = query.get("id");
 
@@ -16,8 +16,8 @@ const ProductView = () => {
     <div className={styles.product}>
       <Header />
       <FilterBar />
-      <ProductInfo id={id} />
-      <ProductReviews id={id} />
+      <ProductInfo id={id} product={product} country={country} buyNow={buyNow} addToCart={addToCart} />
+      <ProductReviews id={id} opinions={opinions} sendOpinion={sendOpinion} />
       <Footer />
     </div>
   );

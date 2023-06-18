@@ -1,33 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+
+import FooterSmall from "components/FooterSmall/FooterSmall";
+import { DataContext } from "providers/DataProvider/DataProvider";
 
 import styles from "./Footer.styles.scss";
-import { Link } from "react-router-dom";
-import FooterSmall from "components/FooterSmall/FooterSmall";
+import { formatCategories } from './Footer.utils';
 
 const Footer = () => {
+  const { categories } = useContext(DataContext);
+  const columns = formatCategories(categories);
+
   return (
     <div className={styles.footer}>
       <div className={styles.footerInner}>
         <div className={styles.logo}>Alkohole24</div>
         <div className={styles.products}>
-          <div className={styles.productColumn}>
-            <Link to="/vodka">wódka</Link>
-            <Link to="/wine">wina</Link>
-            <Link to="/beer">piwa</Link>
-            <Link to="/champagne">szampany</Link>
-          </div>
-          <div className={styles.productColumn}>
-            <Link to="/liquor">likiery</Link>
-            <Link to="/whisky">whisky</Link>
-            <Link to="/gin">gin</Link>
-            <Link to="/rum">rum</Link>
-          </div>
-          <div className={styles.productColumn}>
-            <Link to="/cognac">koniak</Link>
-            <Link to="/absinth">absynt</Link>
-            <Link to="/cider">cydr</Link>
-            <Link to="/mead">miód pitny</Link>
-          </div>
+          {columns.map((column, index) => (
+            <div className={styles.productColumn} key={index}>
+              {column.map((category) => (
+                <Link to={`/?category_id=${category.id}`} key={category.id}>{category.name}</Link>
+              ))}
+            </div>
+          ))}
         </div>
         <FooterSmall className={styles.legal} />
       </div>
