@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import config from 'src/config';
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import config from "src/config";
 
-import View from './Dashboard.view';
-import { formatItems, formatParams } from './Dashboard.utils';
+import View from "./Dashboard.view";
+import { formatItems, formatParams } from "./Dashboard.utils";
+import axios from "axios";
 
 const DashboardPage = () => {
   const [searchParams] = useSearchParams();
@@ -12,13 +13,16 @@ const DashboardPage = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const page = `page=${params.page || 1}`;
-    fetch(`${config.apiUrl}/products?${formatParams(params)}limit=12&${page}`)
-      .then(response => response.json())
-      .then(res => {
-        setItems(formatItems(res.result.data));
-        setTotal(res.result.totalObjects);
-      }).catch(err => console.log(err));
+    (async () => {
+      try {
+        const res = await axios.get(`${config.apiUrl}/products?${formatParams(params)}limit=12&${page}`);
+
+        setItems(formatItems(res.data.result.data));
+        setTotal(res.data.result.totalObjects);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
