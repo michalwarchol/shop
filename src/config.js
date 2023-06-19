@@ -1,5 +1,5 @@
 const config = {
-  apiUrl: 'https://alkohole24pk.000webhostapp.com',
+  apiUrl: 'http://localhost:8000',
 };
 
 export default config;
