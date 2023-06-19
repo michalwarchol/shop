@@ -1,38 +1,44 @@
-import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from 'react';
 
-import config from "src/config";
+import config from 'src/config';
 
 const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const me = async () => {
-    const userId = localStorage.getItem("userId");
+  const me = () => {
+    const userId = localStorage.getItem('userId');
     if (!userId) {
       setUser(null);
       return;
     }
 
-    try {
-      const res = await axios.get(`${config.apiUrl}/me/${userId}`);
-
-      if (res.data.error || res.error) {
-        throw Error("User retrieval error");
+    fetch(`${config.apiUrl}/me/${userId}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(response => response.json())
+    .then(res => {
+      if(res.error) {
+        setUser(null);
+        return;
       }
-      setUser(res.data.user);
-    } catch (error) {
-      console.error(error);
-      setUser(null);
-    }
-  };
+      setUser(res.user);
+    }).catch(error => console.log(error));
+  }
 
   useEffect(() => {
     me();
   }, []);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default UserProvider;

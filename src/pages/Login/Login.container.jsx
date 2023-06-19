@@ -1,38 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import config from "src/config";
+import config from 'src/config';
 
-import View from "./Login.view";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "providers/UserProvider";
-import axios from "axios";
+import View from './Login.view';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from 'providers/UserProvider';
 
 const LoginPage = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const onSubmit = async (values) => {
-    try {
-      const res = await axios.post(`${config.apiUrl}/login`, { email: values.email, password: values.password });
-
-      setUser(res.data.user);
-      localStorage.setItem("userId", res.data.user.id);
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const onSubmit = (values) => {
+    fetch(`${config.apiUrl}/login`, {
+      method: 'POST',
+      body: JSON.stringify({ email: values.email, password: values.password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(response => response.json())
+    .then(res => {
+      setUser(res.user);
+      localStorage.setItem('userId', res.user.id);
+      navigate('/');
+    }).catch(error => console.log(error));
+  }
 
   const redirectToRegister = () => {
-    navigate("/register");
-  };
+    navigate('/register');
+  }
 
-  return (
-    <View
-      onSubmit={onSubmit}
-      redirectToRegister={redirectToRegister}
-    />
-  );
-};
+  return <View onSubmit={onSubmit} redirectToRegister={redirectToRegister} />;
+}
 
 export default LoginPage;

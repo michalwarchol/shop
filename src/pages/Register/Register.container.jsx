@@ -1,38 +1,40 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { UserContext } from "providers/UserProvider";
-import config from "src/config";
+import { UserContext } from 'providers/UserProvider';
+import config from 'src/config';
 
-import View from "./Register.view";
-import axios from "axios";
+import View from './Register.view';
 
 const RegisterPage = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const me = async (userId) => {
-    try {
-      const res = await axios.get(`${config.apiUrl}/me/${userId}`);
+  const me = (userId) => {
+    fetch(`${config.apiUrl}/me/${userId}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(response => response.json())
+    .then(res => {
+      setUser(res);
+    }).catch(error => console.log(error));
+  }
 
-      setUser(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const onSubmit = (values) => {
+  const now = new Date();
 
-  const onSubmit = async (values) => {
-    const now = new Date();
+  //Day
+  const day = '12-12-2000'.substring(0, 2);
+  //Month
+  const month = '12-12-2000'.substring(3, 5);
+  //Year
+  const year = '12-12-2000'.substring(6);
 
-    //Day
-    const day = "12-12-2000".substring(0, 2);
-    //Month
-    const month = "12-12-2000".substring(3, 5);
-    //Year
-    const year = "12-12-2000".substring(6);
-
-    const birthdate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-    const age = now.getFullYear() - birthdate.getFullYear();
+  const birthdate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  const age = now.getFullYear() - birthdate.getFullYear();
 
     const body = {
       first_name: values.firstName,
@@ -41,32 +43,32 @@ const RegisterPage = () => {
       age,
       address: `${values.street} ${values.houseNumber}`,
       password: values.password,
-    };
-    try {
-      const res = await axios.post(`${config.apiUrl}/register`, body);
-
-      if (res.data.error) {
+    }
+    fetch(`${config.apiUrl}/register`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(response => response.json())
+    .then(res => {
+      if(res.error) {
         return;
       }
 
-      localStorage.setItem("userId", res.data.user);
+      localStorage.setItem('userId', res.user);
 
-      me(res.data.user);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      me(res.user);  
+    })
+    .catch(error => console.log(error));
+  }
 
   const redirectToLogin = () => {
-    navigate("/login");
-  };
+    navigate('/login');
+  }
 
-  return (
-    <View
-      onSubmit={onSubmit}
-      redirectToLogin={redirectToLogin}
-    />
-  );
-};
+  return <View onSubmit={onSubmit} redirectToLogin={redirectToLogin} />;
+}
 
 export default RegisterPage;
