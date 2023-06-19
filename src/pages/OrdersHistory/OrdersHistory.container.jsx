@@ -1,54 +1,45 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { DataContext } from "providers/DataProvider/DataProvider";
-import config from "src/config";
+import config from 'src/config';
 
 import View from "./OrdersHistory.view";
-import axios from "axios";
 
 const OrdersHistoryPage = ({ setShowOrders }) => {
   const [orders, setOrders] = useState();
   const { orders: fetchedOrders } = useContext(DataContext);
-  const filteredOrders = fetchedOrders.filter((order) => order.stateId === "3");
+  const filteredOrders = fetchedOrders.filter((order) => order.stateId === '3');
 
   const getOrderEntries = async (orderId) => {
-    try {
-      const res = await axios.get(`${config.apiUrl}/order_entries/${orderId}`);
+    const response = await fetch(`${config.apiUrl}/order_entries/${orderId}`);
+    const res = await response.json();
 
-      return res.data.data;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  };
+    return res.data;
+  }
 
   const getOrderProducts = async (productId) => {
-    try {
-      const res = await axios.get(`${config.apiUrl}/products/${productId}`);
+    const response = await fetch(`${config.apiUrl}/products/${productId}`);
+    const res = await response.json();
 
-      return res.data.product;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  };
+    return res.product;
+  }
 
-  let uniqueArray = function (arr) {
-    let unique = arr.filter(function (item, index, inputArray) {
-      return inputArray.indexOf(item) == index;
-    });
-    return unique;
-  };
+  let uniqueArray = function(arr){
+	let unique = arr.filter(function(item, index, inputArray) {
+		return inputArray.indexOf(item) == index;
+	});
+	return unique;
+}
 
   useEffect(() => {
     (async () => {
       const entries = await Promise.all(filteredOrders.map((order) => getOrderEntries(order.id)));
       const ids = [];
       const a = [];
-      ids.push(...entries.map((order) => order.map((entry) => entry.productId)));
-      ids.forEach((e) => a.push(...e));
+      ids.push(...entries.map(order => order.map(entry => entry.productId)));
+      ids.forEach(e => a.push(...e))
 
-      const products = await Promise.all(uniqueArray(a).map((e) => getOrderProducts(e)));
+      const products = await Promise.all(uniqueArray(a).map(e => getOrderProducts(e)));
 
       const output = entries.map((order) => {
         const formattedOrder = order.map((entry) => {
@@ -56,7 +47,7 @@ const OrdersHistoryPage = ({ setShowOrders }) => {
           return {
             ...entry,
             product: p,
-          };
+          }
         });
         return formattedOrder;
       });
@@ -65,13 +56,13 @@ const OrdersHistoryPage = ({ setShowOrders }) => {
         let totalPrice = 0;
         order.forEach((entry) => {
           totalPrice += entry.amount * entry.historicPrice;
-        });
+        })
 
         return {
           id: index + 1,
           products: order,
-          totalPrice,
-        };
+          totalPrice, 
+        }
       });
 
       setOrders(output2);
